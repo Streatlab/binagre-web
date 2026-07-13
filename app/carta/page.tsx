@@ -11,10 +11,10 @@ export const metadata: Metadata = {
 export default function Carta() {
   return (
     <main className="container section">
-      <h1 className="display" style={{ fontSize: "2.4rem", color: "var(--bin-red)" }}>
+      <h1 className="display" style={{ fontSize: "clamp(2.2rem, 6vw, 3.4rem)" }}>
         La carta
       </h1>
-      <p style={{ margin: "8px 0 28px" }}>
+      <p style={{ margin: "10px 0 20px", fontSize: "1.1rem" }}>
         Corta, honesta y guisada hoy. Menos es más.
       </p>
 
@@ -22,19 +22,20 @@ export default function Carta() {
         const platos = CARTA.filter((p) => p.categoria === cat);
         if (!platos.length) return null;
         return (
-          <section className="section" key={cat} style={{ paddingTop: 8 }}>
-            <h2 className="display">{cat}</h2>
+          <section className="section" key={cat} style={{ paddingTop: 12, paddingBottom: 12 }}>
+            <div className="section-head">
+              <h2 className="display" style={{ color: "var(--rojo)" }}>{cat}</h2>
+              <span className="hilo" aria-hidden />
+            </div>
             <div className="grid">
               {platos.map((p) => (
                 <article className="card" key={p.id}>
-                  <div className="card-img">{p.emoji}</div>
-                  <div className="card-body">
-                    <h3>{p.nombre}</h3>
-                    <p className="desc">{p.desc}</p>
-                    <div className="card-foot">
-                      <span className="price">{fmtEur(p.precio)}</span>
-                      <AddButton plato={p} />
-                    </div>
+                  <div className="plato" aria-hidden>{p.emoji}</div>
+                  <h3>{p.nombre}</h3>
+                  <p className="desc">{p.desc}</p>
+                  <div className="card-foot">
+                    <span className="price">{fmtEur(p.precio)}</span>
+                    <AddButton plato={p} />
                   </div>
                 </article>
               ))}
