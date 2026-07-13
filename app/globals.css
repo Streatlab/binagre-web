@@ -1,117 +1,274 @@
 :root {
-  /* Marca Binagre — bold, retro, orgánico. HOGAR. */
-  --bin-red: #b01d23;
-  --bin-red-dark: #8c1419;
-  --bin-cream: #f7f1e4;
-  --bin-paper: #fffdf7;
-  --bin-ink: #241f1c;
-  --bin-mustard: #e3a72f;
-  --bin-green: #4a5d3a;
-  --radius: 14px;
-  --shadow: 0 2px 0 rgba(36, 31, 28, 0.9);
+  /* Binagre — taberna retro, hogar, guiso. Bold, retro, orgánico. */
+  --rojo: #a81c22;
+  --rojo-osc: #7e1216;
+  --crema: #f3e9d7;
+  --papel: #fbf5e9;
+  --tinta: #2b1d16;
+  --mostaza: #d9a441;
+  --oliva: #5c6b3c;
+  --radius: 18px;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
-html, body {
-  background: var(--bin-cream);
-  color: var(--bin-ink);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--crema);
+  color: var(--tinta);
+  font-family: var(--font-body), "Karla", -apple-system, sans-serif;
   font-size: 17px;
-  line-height: 1.5;
+  line-height: 1.55;
 }
 
 a { color: inherit; text-decoration: none; }
+button { font-family: inherit; }
 
 .display {
-  font-family: Georgia, "Times New Roman", serif;
-  font-weight: 700;
-  letter-spacing: -0.02em;
+  font-family: var(--font-display), "Fraunces", Georgia, serif;
+  font-weight: 900;
+  letter-spacing: -0.015em;
+  line-height: 1.05;
 }
 
-.container { max-width: 960px; margin: 0 auto; padding: 0 20px; }
+.container { max-width: 1040px; margin: 0 auto; padding: 0 22px; }
 
-/* Header */
+/* ── Cinta gingham (mantel) — firma de marca ───────────────── */
+.gingham {
+  height: 12px;
+  background:
+    repeating-linear-gradient(90deg, var(--rojo) 0 12px, transparent 12px 24px),
+    repeating-linear-gradient(0deg, rgba(168,28,34,0.45) 0 6px, transparent 6px 12px),
+    var(--papel);
+}
+
+/* ── Header ────────────────────────────────────────────────── */
 .header {
   position: sticky; top: 0; z-index: 50;
-  background: var(--bin-cream);
-  border-bottom: 3px solid var(--bin-ink);
+  background: var(--crema);
+  border-bottom: 2px solid var(--tinta);
 }
 .header-inner {
   display: flex; align-items: center; justify-content: space-between;
-  height: 64px;
+  height: 68px;
 }
-.logo { font-size: 1.5rem; color: var(--bin-red); }
-.nav { display: flex; gap: 18px; align-items: center; font-weight: 600; }
+.logo {
+  font-size: 1.7rem; color: var(--rojo);
+  text-transform: uppercase; letter-spacing: 0.01em;
+}
+.nav { display: flex; gap: 22px; align-items: center; font-weight: 700; }
+.nav a:not(.btn) { border-bottom: 3px solid transparent; padding-bottom: 2px; }
+.nav a:not(.btn):hover { border-bottom-color: var(--mostaza); }
 
-/* Botón Pedir — siempre visible */
+/* ── Marquee del claim ─────────────────────────────────────── */
+.marquee {
+  overflow: hidden;
+  background: var(--rojo);
+  color: var(--papel);
+  border-top: 2px solid var(--tinta);
+  border-bottom: 2px solid var(--tinta);
+  padding: 9px 0;
+  white-space: nowrap;
+}
+.marquee-track {
+  display: inline-block;
+  animation: marquee 26s linear infinite;
+  font-family: var(--font-display), serif;
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.14em;
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track { animation: none; }
+}
+
+/* ── Botones ───────────────────────────────────────────────── */
 .btn {
   display: inline-block;
-  background: var(--bin-red); color: var(--bin-paper);
-  border: 3px solid var(--bin-ink);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  padding: 10px 22px;
+  background: var(--rojo); color: var(--papel);
+  border: 2px solid var(--tinta);
+  border-radius: 999px;
+  padding: 12px 28px;
   font-weight: 800; font-size: 1rem;
   cursor: pointer;
-  transition: transform 0.08s ease;
+  box-shadow: 3px 3px 0 var(--tinta);
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
 }
-.btn:active { transform: translateY(2px); box-shadow: none; }
-.btn-secondary { background: var(--bin-mustard); color: var(--bin-ink); }
+.btn:hover { transform: translate(-1px, -1px); box-shadow: 4px 4px 0 var(--tinta); }
+.btn:active { transform: translate(2px, 2px); box-shadow: 0 0 0 var(--tinta); }
+.btn:focus-visible { outline: 3px solid var(--mostaza); outline-offset: 2px; }
+.btn-secondary { background: var(--papel); color: var(--tinta); }
 .btn-block { display: block; width: 100%; text-align: center; }
 
-/* Barra fija móvil */
+/* ── Barra fija móvil ──────────────────────────────────────── */
 .mobile-cta {
   position: fixed; bottom: 0; left: 0; right: 0; z-index: 60;
-  padding: 12px 16px;
-  background: var(--bin-cream);
-  border-top: 3px solid var(--bin-ink);
+  padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
+  background: var(--crema);
+  border-top: 2px solid var(--tinta);
   display: none;
 }
 @media (max-width: 720px) {
   .mobile-cta { display: block; }
-  body { padding-bottom: 84px; }
+  body { padding-bottom: 92px; }
 }
 
-/* Hero */
-.hero { padding: 56px 0 40px; text-align: center; }
-.hero h1 { font-size: clamp(2.2rem, 6vw, 3.6rem); color: var(--bin-red); }
-.hero p { font-size: 1.15rem; margin: 14px auto 26px; max-width: 560px; }
+/* ── Hero ──────────────────────────────────────────────────── */
+.hero { padding: 72px 0 48px; }
+.hero-eyebrow {
+  display: inline-block;
+  background: var(--mostaza);
+  border: 2px solid var(--tinta);
+  border-radius: 999px;
+  padding: 4px 16px;
+  font-weight: 800; font-size: 0.82rem;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  transform: rotate(-2deg);
+  margin-bottom: 22px;
+}
+.hero h1 {
+  font-size: clamp(2.8rem, 8vw, 5.2rem);
+  color: var(--tinta);
+}
+.hero h1 .rojo { color: var(--rojo); display: block; }
+.hero-sub {
+  font-size: 1.2rem; max-width: 540px;
+  margin: 20px 0 30px;
+}
+.hero-cta-row { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
 
-/* Cards de plato */
-.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 18px; }
+/* ── Ticket de zona de reparto ─────────────────────────────── */
+.ticket {
+  margin-top: 44px;
+  background: var(--papel);
+  border: 2px solid var(--tinta);
+  border-radius: 6px;
+  padding: 22px 24px;
+  max-width: 480px;
+  position: relative;
+  box-shadow: 4px 4px 0 rgba(43, 29, 22, 0.18);
+}
+.ticket::before {
+  content: "";
+  position: absolute; top: -2px; left: 0; right: 0; height: 8px;
+  background:
+    repeating-linear-gradient(90deg, var(--crema) 0 10px, transparent 10px 20px);
+}
+.ticket h3 {
+  font-family: var(--font-display), serif;
+  font-weight: 600; font-size: 1.05rem;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+/* ── Platos (la firma: el plato es redondo, como en la mesa) ── */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 26px;
+}
 .card {
-  background: var(--bin-paper);
-  border: 3px solid var(--bin-ink);
+  background: var(--papel);
+  border: 2px solid var(--tinta);
   border-radius: var(--radius);
-  box-shadow: var(--shadow);
+  padding: 26px 20px 20px;
+  display: flex; flex-direction: column; align-items: center;
+  text-align: center;
+  transition: transform 0.14s ease, box-shadow 0.14s ease;
+}
+.card:hover { transform: translateY(-4px); box-shadow: 5px 6px 0 rgba(43,29,22,0.16); }
+.plato {
+  width: 148px; height: 148px;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 34% 30%, #ffffff 0%, #f4ecdc 58%, #e4d7bd 100%);
+  border: 2px solid var(--tinta);
+  box-shadow: inset 0 0 0 10px var(--papel), inset 0 0 0 12px rgba(43,29,22,0.25), 0 6px 0 rgba(43,29,22,0.12);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 3.4rem;
+  margin-bottom: 16px;
   overflow: hidden;
-  display: flex; flex-direction: column;
 }
-.card-img { aspect-ratio: 4/3; background: #e8dfcc; display: flex; align-items: center; justify-content: center; font-size: 3rem; }
-.card-body { padding: 14px 16px 16px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
-.card-body h3 { font-size: 1.1rem; }
-.card-body .desc { font-size: 0.92rem; color: #5a534d; flex: 1; }
-.card-foot { display: flex; align-items: center; justify-content: space-between; }
-.price { font-weight: 800; font-size: 1.15rem; }
-
-.section { padding: 36px 0; }
-.section h2 { font-size: 1.8rem; margin-bottom: 18px; color: var(--bin-red); }
-
-.badge {
-  display: inline-block; background: var(--bin-mustard); color: var(--bin-ink);
-  border: 2px solid var(--bin-ink); border-radius: 999px;
-  padding: 2px 12px; font-size: 0.8rem; font-weight: 800;
+.plato img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+.card h3 {
+  font-family: var(--font-display), serif;
+  font-weight: 900; font-size: 1.25rem;
+  color: var(--rojo);
+  margin-bottom: 6px;
+}
+.card .desc { font-size: 0.94rem; color: #5d4c40; flex: 1; }
+.card-foot {
+  margin-top: 16px;
+  display: flex; align-items: center; gap: 16px;
+}
+.price {
+  font-family: var(--font-display), serif;
+  font-weight: 900; font-size: 1.3rem;
 }
 
-/* Inputs */
+/* ── Secciones ─────────────────────────────────────────────── */
+.section { padding: 52px 0; }
+.section-head {
+  display: flex; align-items: baseline; gap: 16px;
+  margin-bottom: 26px;
+}
+.section-head h2 {
+  font-size: clamp(1.7rem, 4vw, 2.4rem);
+  color: var(--tinta);
+}
+.section-head .hilo {
+  flex: 1; height: 2px;
+  background: repeating-linear-gradient(90deg, var(--tinta) 0 10px, transparent 10px 18px);
+  opacity: 0.35;
+}
+
+.hogar {
+  background: var(--rojo);
+  color: var(--papel);
+  border-top: 2px solid var(--tinta);
+  border-bottom: 2px solid var(--tinta);
+}
+.hogar h2 { color: var(--mostaza); margin-bottom: 14px; }
+.hogar p { max-width: 640px; font-size: 1.1rem; }
+
+/* ── Inputs ────────────────────────────────────────────────── */
 .input {
-  border: 3px solid var(--bin-ink); border-radius: var(--radius);
-  padding: 10px 14px; font-size: 1rem; background: var(--bin-paper);
-  width: 100%;
+  border: 2px solid var(--tinta); border-radius: 12px;
+  padding: 12px 16px; font-size: 1rem;
+  background: #fff; width: 100%;
+  font-family: inherit;
 }
-.cp-row { display: flex; gap: 10px; max-width: 420px; margin: 0 auto; }
-.note-ok { color: var(--bin-green); font-weight: 700; }
-.note-ko { color: var(--bin-red); font-weight: 700; }
+.input:focus-visible { outline: 3px solid var(--mostaza); outline-offset: 1px; }
+.cp-row { display: flex; gap: 10px; }
+.note-ok { color: var(--oliva); font-weight: 800; }
+.note-ko { color: var(--rojo); font-weight: 800; }
 
-.footer { border-top: 3px solid var(--bin-ink); margin-top: 48px; padding: 28px 0; font-size: 0.9rem; }
+/* ── Carrito ───────────────────────────────────────────────── */
+.linea {
+  background: var(--papel);
+  border: 2px solid var(--tinta);
+  border-radius: 14px;
+  display: flex; align-items: center; gap: 14px;
+  padding: 12px 16px;
+}
+.qty-btn {
+  width: 34px; height: 34px; border-radius: 50%;
+  border: 2px solid var(--tinta);
+  background: var(--mostaza);
+  font-weight: 900; font-size: 1.05rem; cursor: pointer;
+}
+
+/* ── Footer ────────────────────────────────────────────────── */
+.footer {
+  border-top: 2px solid var(--tinta);
+  margin-top: 60px; padding: 34px 0;
+}
+.footer .claim {
+  font-size: 1.35rem; color: var(--rojo); margin-bottom: 8px;
+}
+.footer p { font-size: 0.92rem; }
